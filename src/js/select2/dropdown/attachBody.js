@@ -27,6 +27,11 @@ define([
           self._resizeDropdown();
         });
 
+        container.on('results:resize', function(){
+          self._positionDropdown();
+          self._resizeDropdown();
+        });
+
         container.on('results:append', function () {
           self._positionDropdown();
           self._resizeDropdown();

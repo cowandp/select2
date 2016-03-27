@@ -401,6 +401,7 @@ define([
     }
 
     this.trigger('query', {});
+    this.trigger('results:resize');
   };
 
   Select2.prototype.close = function () {

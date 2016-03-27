@@ -93,7 +93,7 @@ define([
         term: input
       });
     }
-
+    this.trigger('results:resize');
     this._keyUpPrevented = false;
   };
 
