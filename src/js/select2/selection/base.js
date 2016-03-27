@@ -13,9 +13,12 @@ define([
   Utils.Extend(BaseSelection, Utils.Observable);
 
   BaseSelection.prototype.render = function () {
+    var currentAriaLabel = this.$element.attr('aria-labelledby') || "";
+    var currentAriaDescription = this.$element.attr('aria-describedby') || "";
+    
     var $selection = $(
-      '<span class="select2-selection" role="combobox" ' +
-      ' aria-haspopup="true" aria-expanded="false">' +
+      '<span class="select2-selection" ' +
+      ' aria-haspopup="true" aria-expanded="false" role="combobox" aria-labelledby="' + currentAriaLabel + '" aria-describedby="' + currentAriaDescription + '">' +
       '</span>'
     );
 

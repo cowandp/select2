@@ -524,10 +524,14 @@ define([
   };
 
   Select2.prototype.render = function () {
+    var escapeMarkup = this.options.get('escapeMarkup');
+    var instructionsMessage = this.options.get('translations').get("instructions");
+
     var $container = $(
       '<span class="select2 select2-container">' +
-        '<span class="selection"></span>' +
-        '<span class="dropdown-wrapper" aria-hidden="true"></span>' +
+      '<span class="selection"></span>' +
+      '<span class="dropdown-wrapper" aria-hidden="true"></span>' +
+      '<span id="' + this.id + '-instructions" class="select2-hidden-accessible">'+ escapeMarkup(instructionsMessage())  +'</span>' +
       '</span>'
     );
 

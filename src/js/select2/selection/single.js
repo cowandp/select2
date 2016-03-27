@@ -33,7 +33,12 @@ define([
     var id = container.id + '-container';
 
     this.$selection.find('.select2-selection__rendered').attr('id', id);
-    this.$selection.attr('aria-labelledby', id);
+
+    var currentLabel = this.$selection.attr('aria-labelledby') || "";
+    var currentDescription = this.$selection.attr('aria-describedby') || "";
+
+    this.$selection.attr('aria-labelledby', currentLabel + " " + id + "-selection");
+    this.$selection.attr('aria-describedby', container.id + "-instructions" + " " + currentDescription);
 
     this.$selection.on('mousedown', function (evt) {
       // Only respond to left clicks
@@ -82,8 +87,10 @@ define([
 
     var selection = data[0];
 
+    var selectionId = this.container.id + "-container-selection";
+
     var $rendered = this.$selection.find('.select2-selection__rendered');
-    var formatted = this.display(selection, $rendered);
+    var formatted = $('<span id="' + selectionId + '">' + this.display(selection, $rendered) + "</span>");
 
     $rendered.empty().append(formatted);
     $rendered.prop('title', selection.title || selection.text);

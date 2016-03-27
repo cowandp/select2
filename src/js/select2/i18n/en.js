@@ -39,6 +39,12 @@ define(function () {
     },
     searching: function () {
       return 'Searching…';
+    },
+    instructions: function(){
+      return "To interact with this control, press spacebar to open the search box. To clear the value, press the delete key.";
+    },
+    clearButtonLabel: function(){
+      return "Clear Selection";
     }
   };
 });

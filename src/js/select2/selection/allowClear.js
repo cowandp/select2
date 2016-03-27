@@ -72,25 +72,48 @@ define([
 
     if (evt.which == KEYS.DELETE || evt.which == KEYS.BACKSPACE) {
       this._handleClear(evt);
+      evt.preventDefault();
     }
   };
 
   AllowClear.prototype.update = function (decorated, data) {
     decorated.call(this, data);
 
+    var self = this;
+
     if (this.$selection.find('.select2-selection__placeholder').length > 0 ||
         data.length === 0) {
       return;
     }
 
+    var escapeMarkup = this.options.get('escapeMarkup');
+    var clearLabel = this.options.get('translations').get("clearButtonLabel");
+    var currentAriaLabel = this.$element.attr('aria-labelledby') || "";
+
     var $remove = $(
-      '<span class="select2-selection__clear">' +
-        '&times;' +
+      '<span aria-labelledby="' + currentAriaLabel + ' select2-selection__clear-label" tabindex="0" role="button" class="select2-selection__clear">' +
+        '&times;' + '<span id="select2-selection__clear-label" class="select2-hidden-accessible">' + escapeMarkup(clearLabel()) + '</span>' +
       '</span>'
     );
     $remove.data('data', data);
 
     this.$selection.find('.select2-selection__rendered').prepend($remove);
+
+    $remove.on('keydown',
+      function (evt) {
+        if (evt.which === KEYS.ENTER || evt.which === KEYS.SPACE) {
+          self._handleClear(evt);
+          evt.preventDefault();
+        }
+      });
+
+    $remove.on('blur', function(evt){
+      self._handleBlur(evt);
+    });
+
+    $remove.on('focus', function(evt){
+      self.trigger('focus', evt);
+    });
   };
 
   return AllowClear;
