@@ -174,6 +174,8 @@ define([
 
     if (data.id == null) {
       delete attrs['aria-selected'];
+    } else {
+      attrs['id'] = this.$results.attr('id') + "_" + data.id;
     }
 
     if (data._resultId != null) {
