@@ -340,6 +340,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-sass');
 
   grunt.registerTask('default', ['compile', 'test', 'minify']);
+  grunt.registerTask('prod', ['compile', 'minify']);
 
   grunt.registerTask('compile', [
     'requirejs:dist', 'requirejs:dist.full', 'requirejs:i18n',
@@ -351,7 +352,7 @@ module.exports = function (grunt) {
 
   var ciTasks = [];
 
-  ciTasks.push('compile')
+  ciTasks.push('compile');
   ciTasks.push('connect:tests');
 
   // Can't run Sauce Labs tests in pull requests

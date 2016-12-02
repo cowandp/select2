@@ -9,7 +9,8 @@ define([
       'open', 'opening',
       'close', 'closing',
       'select', 'selecting',
-      'unselect', 'unselecting'
+      'unselect', 'unselecting',
+      'blur', 'focus'
     ];
 
     var preventableEvents = ['opening', 'closing', 'selecting', 'unselecting'];
